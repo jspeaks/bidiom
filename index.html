@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bidiom — Marketplace User Interface Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #4f46e5;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+        }
+
+        .nav-link {
+            transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover {
+            color: #4f46e5;
+        }
+
+        .section-header {
+            font-size: 2.75rem;
+            line-height: 1.1;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .marketplace-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), 
+                       box-shadow 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        
+        .marketplace-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #4f46e5, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-bg {
+            background: 
+                radial-gradient(at 40% 20%, rgba(79, 70, 229, 0.08) 0%, transparent 50%),
+                radial-gradient(at 80% 80%, rgba(99, 102, 241, 0.06) 0%, transparent 50%);
+        }
+
+        .nav-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+        }
+
+        .feature-icon {
+            transition: all 0.2s ease;
+        }
+
+        .marketplace-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900 antialiased">
+    <!-- Navbar -->
+    <nav id="nav" class="fixed top-0 left-0 right-0 z-50 border-b border-slate-100 bg-white/95 backdrop-blur-lg transition-all">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-inner">
+                        <span class="text-white font-bold text-2xl tracking-tighter font-display">b</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-2xl tracking-tighter font-display">bidiom</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+                    <a href="#solutions" class="nav-link text-slate-600 hover:text-slate-900">Solutions</a>
+                    <a href="#expertise" class="nav-link text-slate-600 hover:text-slate-900">Expertise</a>
+                    <a href="#approach" class="nav-link text-slate-600 hover:text-slate-900">Approach</a>
+                </div>
+
+                <div class="flex items-center gap-x-4">
+                    <a href="mailto:jaye@bidiom.com" 
+                       class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-2xl border border-slate-200 hover:bg-slate-50 transition-colors">
+                        Get in touch
+                    </a>
+                    <a href="mailto:jaye@bidiom.com" 
+                       class="inline-flex items-center justify-center px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold rounded-2xl transition-all active:scale-[0.985]">
+                        Start a project
+                    </a>
+                    
+                    <!-- Mobile menu button -->
+                    <button class="md:hidden w-10 h-10 flex items-center justify-center text-slate-600" id="mobile-menu-btn">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-[60] bg-white pt-20 px-6">
+        <div class="flex flex-col gap-y-1 text-lg font-medium pt-4">
+            <a href="#solutions" class="py-4 border-b border-slate-100 mobile-link">Solutions</a>
+            <a href="#expertise" class="py-4 border-b border-slate-100 mobile-link">Expertise</a>
+            <a href="#approach" class="py-4 border-b border-slate-100 mobile-link">Approach</a>
+            <div class="pt-6 flex flex-col gap-y-3">
+                <a href="mailto:jaye@bidiom.com" class="py-3 px-5 border border-slate-200 rounded-2xl text-center font-medium">Get in touch</a>
+                <a href="mailto:jaye@bidiom.com" class="py-3 px-5 bg-slate-900 text-white rounded-2xl text-center font-semibold">Start a project</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <header class="pt-20 pb-16 md:pt-28 md:pb-24 hero-bg border-b border-slate-100">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-x-2 px-4 h-8 rounded-3xl bg-indigo-50 text-indigo-700 text-sm font-medium mb-6">
+                <div class="w-2 h-2 bg-indigo-600 rounded-full animate-pulse"></div>
+                Marketplace UI specialists
+            </div>
+            
+            <h1 class="text-6xl md:text-7xl leading-[1.05] tracking-tighter font-semibold font-display max-w-4xl mx-auto">
+                Interfaces that<br>make marketplaces<br><span class="gradient-text">thrive</span>.
+            </h1>
+            
+            <p class="mt-6 text-xl text-slate-600 max-w-md mx-auto leading-relaxed">
+                We design and build exceptional user experiences for multi-vendor platforms, 
+                e-commerce marketplaces, and collaborative ecosystems.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#solutions" 
+                   class="group inline-flex items-center justify-center gap-x-3 w-full sm:w-auto px-8 h-14 bg-white border border-slate-200 hover:border-slate-300 font-semibold rounded-3xl transition-all active:scale-[0.985]">
+                    Explore solutions
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-0.5 transition"></i>
+                </a>
+                <a href="mailto:jaye@bidiom.com?subject=Project%20inquiry" 
+                   class="inline-flex items-center justify-center w-full sm:w-auto px-8 h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-3xl transition-all active:scale-[0.985]">
+                    Talk to us
+                </a>
+            </div>
+            
+            <div class="mt-14 flex items-center justify-center gap-x-8 text-sm">
+                <div class="flex -space-x-2">
+                    <div class="w-7 h-7 rounded-full bg-slate-200 ring-2 ring-white overflow-hidden"><img src="https://i.pravatar.cc/28?img=28" class="w-full h-full object-cover"></div>
+                    <div class="w-7 h-7 rounded-full bg-slate-200 ring-2 ring-white overflow-hidden"><img src="https://i.pravatar.cc/28?img=32" class="w-full h-full object-cover"></div>
+                    <div class="w-7 h-7 rounded-full bg-slate-200 ring-2 ring-white overflow-hidden"><img src="https://i.pravatar.cc/28?img=47" class="w-full h-full object-cover"></div>
+                </div>
+                <div class="text-slate-500 text-xs leading-tight">
+                    Trusted by teams building<br>the next generation of marketplaces
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Solutions -->
+    <section id="solutions" class="max-w-6xl mx-auto px-6 pt-20 pb-16">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-4 mb-10">
+            <div>
+                <div class="uppercase tracking-[2px] text-xs font-semibold text-indigo-600">What we build</div>
+                <h2 class="section-header tracking-tight mt-1">Purpose-built UI<br>for marketplaces.</h2>
+            </div>
+            <p class="max-w-sm text-slate-600">Every pattern we implement has been battle-tested across complex multi-party platforms.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="marketplace-card group bg-white border border-slate-100 rounded-3xl p-8">
+                <div class="feature-icon w-12 h-12 flex items-center justify-center rounded-2xl bg-indigo-100 text-indigo-600 mb-6">
+                    <i class="fa-solid fa-search text-3xl"></i>
+                </div>
+                <h3 class="font-semibold text-xl tracking-tight mb-3">Discovery &amp; Search</h3>
+                <p class="text-slate-600 leading-relaxed">Intelligent search, faceted filters, smart recommendations, and visual browsing experiences that help buyers find exactly what they need across thousands of vendors.</p>
+                <div class="mt-6 text-xs uppercase tracking-widest font-medium text-indigo-600">Core capability</div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="marketplace-card group bg-white border border-slate-100 rounded-3xl p-8">
+                <div class="feature-icon w-12 h-12 flex items-center justify-center rounded-2xl bg-teal-100 text-teal-600 mb-6">
+                    <i class="fa-solid fa-chart-line text-3xl"></i>
+                </div>
+                <h3 class="font-semibold text-xl tracking-tight mb-3">Dashboards &amp; Insights</h3>
+                <p class="text-slate-600 leading-relaxed">Real-time analytics, performance visualizations, and operational dashboards that give vendors and platform operators clarity and control.</p>
+                <div class="mt-6 text-xs uppercase tracking-widest font-medium text-teal-600">Data intensive</div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="marketplace-card group bg-white border border-slate-100 rounded-3xl p-8">
+                <div class="feature-icon w-12 h-12 flex items-center justify-center rounded-2xl bg-violet-100 text-violet-600 mb-6">
+                    <i class="fa-solid fa-store text-3xl"></i>
+                </div>
+                <h3 class="font-semibold text-xl tracking-tight mb-3">Vendor Experience</h3>
+                <p class="text-slate-600 leading-relaxed">Onboarding flows, inventory management, order fulfillment tools, and communication interfaces that make it easy for sellers to succeed on your platform.</p>
+                <div class="mt-6 text-xs uppercase tracking-widest font-medium text-violet-600">Multi-tenant</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats / Trust -->
+    <div class="bg-slate-950 py-12 text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
+                <div>
+                    <div class="text-4xl font-semibold tracking-tighter font-display">12+</div>
+                    <div class="mt-1 text-slate-400">Marketplaces launched</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-semibold tracking-tighter font-display">4.8m</div>
+                    <div class="mt-1 text-slate-400">Monthly active users served</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-semibold tracking-tighter font-display">98%</div>
+                    <div class="mt-1 text-slate-400">Average task completion rate</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-semibold tracking-tighter font-display">3.2x</div>
+                    <div class="mt-1 text-slate-400">Avg. conversion lift</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Expertise -->
+    <section id="expertise" class="max-w-6xl mx-auto px-6 py-20">
+        <div class="max-w-xl">
+            <div class="uppercase tracking-[2px] text-xs font-semibold text-indigo-600">Deep expertise</div>
+            <h2 class="section-header tracking-tight mt-2">We speak the language of marketplaces.</h2>
+        </div>
+
+        <div class="mt-10 grid md:grid-cols-2 gap-px bg-slate-100 rounded-3xl overflow-hidden">
+            <div class="bg-white p-8 md:p-9">
+                <h4 class="font-semibold text-lg">Platform Patterns We Master</h4>
+                <ul class="mt-5 space-y-3 text-slate-600">
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-emerald-500 mt-1.5"></i> Multi-vendor catalog management</li>
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-emerald-500 mt-1.5"></i> Complex pricing &amp; commission models</li>
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-emerald-500 mt-1.5"></i> Trust &amp; safety interfaces</li>
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-emerald-500 mt-1.5"></i> Dispute resolution workflows</li>
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-emerald-500 mt-1.5"></i> Rating, review &amp; reputation systems</li>
+                </ul>
+            </div>
+            <div class="bg-white p-8 md:p-9 border-t md:border-t-0 md:border-l border-slate-100">
+                <h4 class="font-semibold text-lg">Technical Strengths</h4>
+                <ul class="mt-5 space-y-3 text-slate-600">
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-emerald-500 mt-1.5"></i> High-performance React / Next.js frontends</li>
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-emerald-500 mt-1.5"></i> Design systems &amp; component libraries</li>
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-emerald-500 mt-1.5"></i> Accessible, WCAG 2.2 compliant UIs</li>
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-emerald-500 mt-1.5"></i> Real-time collaboration features</li>
+                    <li class="flex gap-3"><i class="fa-solid fa-check text-emerald-500 mt-1.5"></i> Mobile-first &amp; progressive web apps</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approach -->
+    <section id="approach" class="bg-slate-50 border-y border-slate-100 py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="max-w-2xl">
+                <div class="uppercase tracking-[2px] text-xs font-semibold text-indigo-600">How we work</div>
+                <h2 class="section-header tracking-tight mt-2">A focused, collaborative process.</h2>
+                <p class="mt-4 text-lg text-slate-600">We partner closely with founders, product teams, and engineering organizations to ship interfaces that feel inevitable.</p>
+            </div>
+
+            <div class="mt-12 grid md:grid-cols-3 gap-6">
+                <div class="bg-white border border-slate-100 rounded-3xl p-7">
+                    <div class="text-xs tracking-widest text-slate-400 font-medium">01</div>
+                    <div class="font-semibold text-xl mt-3">Discover</div>
+                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">Deep dives into your marketplace mechanics, user research, competitive analysis, and current pain points.</p>
+                </div>
+                <div class="bg-white border border-slate-100 rounded-3xl p-7">
+                    <div class="text-xs tracking-widest text-slate-400 font-medium">02</div>
+                    <div class="font-semibold text-xl mt-3">Design &amp; Prototype</div>
+                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">High-fidelity prototypes, interaction design, and component libraries that capture the unique personality of your platform.</p>
+                </div>
+                <div class="bg-white border border-slate-100 rounded-3xl p-7">
+                    <div class="text-xs tracking-widest text-slate-400 font-medium">03</div>
+                    <div class="font-semibold text-xl mt-3">Build &amp; Integrate</div>
+                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">Production-ready implementation with your existing stack. We collaborate directly with your engineers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="max-w-4xl mx-auto px-6 py-20 text-center">
+        <h2 class="text-4xl md:text-5xl tracking-tighter font-semibold font-display">Ready to improve your marketplace experience?</h2>
+        <p class="mt-4 text-xl text-slate-600 max-w-sm mx-auto">Let's talk about the specific challenges you're facing and how we can help.</p>
+        
+        <div class="mt-8">
+            <a href="mailto:jaye@bidiom.com" 
+               class="inline-flex items-center gap-x-3 px-8 h-14 bg-slate-900 hover:bg-black transition text-white font-semibold rounded-3xl text-base active:scale-[0.985]">
+                <span>Email jaye@bidiom.com</span>
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        </div>
+        
+        <div class="mt-6 text-sm text-slate-500">We typically respond within one business day.</div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-100 py-10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-y-4 text-sm text-slate-500">
+            <div>© <span id="year"></span> Bidiom. All rights reserved.</div>
+            
+            <div class="flex items-center gap-x-6">
+                <a href="mailto:jaye@bidiom.com" class="hover:text-slate-700 transition">jaye@bidiom.com</a>
+                <div class="w-px h-3 bg-slate-200"></div>
+                <span>Marketplace UI solutions</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind script configuration
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#4f46e5');
+        }
+        
+        // Navbar scroll effect
+        function initNavbar() {
+            const nav = document.getElementById('nav');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    nav.classList.add('nav-scrolled', 'shadow-sm');
+                } else {
+                    nav.classList.remove('nav-scrolled', 'shadow-sm');
+                }
+            });
+        }
+
+        // Mobile menu
+        function initMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            
+            btn.addEventListener('click', () => {
+                const isHidden = menu.classList.contains('hidden');
+                if (isHidden) {
+                    menu.classList.remove('hidden');
+                    btn.innerHTML = '<i class="fa-solid fa-times text-xl"></i>';
+                } else {
+                    menu.classList.add('hidden');
+                    btn.innerHTML = '<i class="fa-solid fa-bars text-xl"></i>';
+                }
+            });
+            
+            // Close on link click
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                    btn.innerHTML = '<i class="fa-solid fa-bars text-xl"></i>';
+                });
+            });
+        }
+
+        // Smooth scroll for anchor links
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        const navHeight = 80;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.scrollY - navHeight;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Footer year
+        function initFooterYear() {
+            document.getElementById('year').textContent = new Date().getFullYear();
+        }
+
+        // Keyboard escape for mobile menu
+        function initKeyboard() {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const menu = document.getElementById('mobile-menu');
+                    const btn = document.getElementById('mobile-menu-btn');
+                    if (!menu.classList.contains('hidden')) {
+                        menu.classList.add('hidden');
+                        btn.innerHTML = '<i class="fa-solid fa-bars text-xl"></i>';
+                    }
+                }
+            });
+        }
+
+        // Boot everything
+        function init() {
+            initializeTailwind();
+            initNavbar();
+            initMobileMenu();
+            initSmoothScroll();
+            initFooterYear();
+            initKeyboard();
+            
+            // Optional: subtle console note for developers
+            console.log('%c[bidiom] Simple static landing ready. Deploy via Vercel.', 'color:#64748b;font-size:9px');
+        }
+
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
