@@ -27,21 +27,23 @@ npx serve .
 
 This project is designed to be deployed via **Vercel** while living in **GitHub**, with the custom domain `bidiom.com` managed through **Dreamhost**.
 
+The GitHub repository has already been created and the initial landing page pushed:
+
+**https://github.com/jspeaks/bidiom**
+
 ### Recommended Flow
 
-1. **Push to GitHub**
-   - Create a new repository on GitHub (recommended name: `bidiom` or `bidiom.com`)
-   - Push this folder:
-     ```bash
-     git init
-     git add .
-     git commit -m "Initial landing page"
-     git remote add origin https://github.com/YOUR_USERNAME/bidiom.git
-     git branch -M main
-     git push -u origin main
-     ```
+1. **Import into Vercel** (your next step)
+   - Go to [https://vercel.com/jspeaks-projects](https://vercel.com/jspeaks-projects)
+   - Click **Add New Project** → **Import Git Repository**
+   - Select the `bidiom` repo (jspeaks/bidiom)
+   - Framework Preset: **Other** (or leave as "Not configured")
+   - Root Directory: leave as `/`
+   - Build Command: (leave blank)
+   - Output Directory: (leave blank)
+   - Click Deploy
 
-2. **Import into Vercel**
+2. **(Already done)** The code is on GitHub main branch.
    - Go to [https://vercel.com/jspeaks-projects](https://vercel.com/jspeaks-projects)
    - Click **Add New Project** → **Import Git Repository**
    - Select your `bidiom` repo
